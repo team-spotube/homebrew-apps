@@ -3,7 +3,7 @@
 Add this tap to your Homebrew:
 
 ```sh
-brew tap krtirtho/apps
+brew tap team-spotube/apps
 ```
 
 Then install the apps you want:
