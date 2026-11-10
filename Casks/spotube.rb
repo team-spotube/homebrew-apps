@@ -1,24 +1,28 @@
 cask "spotube" do
-  version "5.1.1"
-  sha256 "91441d2d66b0b48561cde3b935f51ae37e4939feff48254185229f421dc9f7a2"
+  version "6.0.0"
+  sha256 "e460de6a0a0c60afda63af1d1c022f3e39d03610852cd7e2f4dedbc612d245d3"
 
-  url "https://github.com/KRTirtho/spotube/releases/download/v#{version}/Spotube-macos-universal.dmg",
-      verified: "github.com/KRTirtho/spotube/"
+  url "https://github.com/team-spotube/spotube/releases/download/v#{version}/Spotube-macos-apple-silicon.dmg",
+      verified: "github.com/team-spotube/spotube/"
   name "Spotube"
-  desc "A cross-platform extensible open-source music streaming platform"
-  homepage "https://spotube.krtirtho.dev/"
+  desc "Open source, plugin powered music streaming client"
+  homepage "https://spotube.cc/"
 
   livecheck do
     url :url
     strategy :github_latest
   end
 
-  app "spotube.app"
+  # Intel macs aren't supported: GraalVM native-image can't cross-compile the DMG
+  depends_on arch: :arm64
+
+  app "Spotube.app"
 
   zap trash: [
-    "~/Library/Application Scripts/oss.krtirtho.spotube",
-    "~/Library/Application Support/oss.krtirtho.spotube",
+    "~/Library/Application Support/Spotube",
+    "~/Library/Caches/Spotube",
+    "~/Library/Preferences/org.spotube.spotube.plist",
+    "~/Library/Saved Application State/org.spotube.spotube.savedState",
+    "~/Library/WebKit/org.spotube.spotube",
   ]
-
-  depends_on formula: "yt-dlp"
 end
